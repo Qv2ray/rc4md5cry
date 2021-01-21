@@ -23,5 +23,5 @@ jobs:
       run: cargo build --verbose --release
     - uses: actions/upload-artifact@v2
       with:
-        name: rc4md5cry${{ matrix.exe_suffix }}
+        name: rc4md5cry-${{ matrix.os }}${{ matrix.exe_suffix }}
         path: target/release/rc4md5cry${{ matrix.exe_suffix }}
