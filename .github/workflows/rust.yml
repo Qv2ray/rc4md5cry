@@ -8,10 +8,20 @@ env:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            exe_suffix: '.exe'
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: cargo build --verbose
+      run: cargo build --verbose --release
+    - uses: actions/upload-artifact@v2
+      with:
+        name: rc4md5cry${{ matrix.exe_suffix }}
+        path: target/release/rc4md5cry${{ matrix.exe_suffix }}
